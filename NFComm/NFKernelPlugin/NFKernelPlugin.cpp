@@ -25,14 +25,13 @@
 
 #include "NFKernelPlugin.h"
 #include "NFKernelModule.h"
-#include "NFSceneAOIModule.h"
+#include "NFSceneModule.h"
 #include "NFEventModule.h"
 #include "NFScheduleModule.h"
 #include "NFDataTailModule.h"
 #include "NFCellModule.h"
+#include "NFThreadPoolModule.h"
 
-//
-//
 #ifdef NF_DYNAMIC_PLUGIN
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
@@ -62,15 +61,15 @@ const std::string NFKernelPlugin::GetPluginName()
 
 void NFKernelPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOIModule)
+    REGISTER_MODULE(pPluginManager, NFISceneModule, NFSceneModule)
 	REGISTER_MODULE(pPluginManager, NFIKernelModule, NFKernelModule)
 	REGISTER_MODULE(pPluginManager, NFIEventModule, NFEventModule)
 	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFScheduleModule)
 	REGISTER_MODULE(pPluginManager, NFIDataTailModule, NFDataTailModule)
 	REGISTER_MODULE(pPluginManager, NFICellModule, NFCellModule)
+	REGISTER_MODULE(pPluginManager, NFIThreadPoolModule, NFThreadPoolModule)
 
 	/*
-	REGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOITestModule)
 	REGISTER_TEST_MODULE(pPluginManager, NFIKernelModule, NFKernelTestModule)
 	REGISTER_TEST_MODULE(pPluginManager, NFIEventModule, NFEventTestModule)
 	REGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFScheduleTestModule)
@@ -82,13 +81,14 @@ void NFKernelPlugin::Uninstall()
 	/*
 	UNREGISTER_TEST_MODULE(pPluginManager, NFIEventModule, NFEventTestModule)
 	UNREGISTER_TEST_MODULE(pPluginManager, NFIKernelModule, NFKernelTestModule)
-	UNREGISTER_TEST_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOITestModule)
 	UNREGISTER_TEST_MODULE(pPluginManager, NFIScheduleModule, NFScheduleTestModule)
 */
+	UNREGISTER_MODULE(pPluginManager, NFIThreadPoolModule, NFThreadPoolModule)
 	UNREGISTER_MODULE(pPluginManager, NFICellModule, NFCellModule)
 	UNREGISTER_MODULE(pPluginManager, NFIDataTailModule, NFDataTailModule)
 	UNREGISTER_MODULE(pPluginManager, NFIEventModule, NFEventModule)
 	UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFKernelModule)
-	UNREGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFSceneAOIModule)
+	UNREGISTER_MODULE(pPluginManager, NFISceneModule, NFSceneModule)
 	UNREGISTER_MODULE(pPluginManager, NFIScheduleModule, NFScheduleModule)
+
 }
