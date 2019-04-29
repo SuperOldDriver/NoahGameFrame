@@ -23,12 +23,12 @@
    limitations under the License.
 */
 
-#ifndef NFC_HELLO_WORLD_H
-#define NFC_HELLO_WORLD_H
+#ifndef NF_HELLO_WORLD_H
+#define NF_HELLO_WORLD_H
 
 #include <iostream>
 
-#include "NFComm/NFCore/NFCObject.h"
+#include "NFComm/NFCore/NFObject.h"
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
@@ -52,11 +52,11 @@ class NFIHelloWorld
 
 };
 
-class NFCHelloWorld
+class NFHelloWorld
     : public NFIHelloWorld
 {
 public:
-    NFCHelloWorld(NFIPluginManager* p)
+    NFHelloWorld(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -72,14 +72,12 @@ public:
 protected:
 	bool OnCommandQuery(const NFHttpRequest& req);
 
-	bool OnCommonQuery(const NFHttpRequest& req);
-
 	NFWebStatus OnFilter(const NFHttpRequest& req);
 
 	int OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 
 	void OnGetCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
-	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
+	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData);
 private:
 
 	NFIClassModule* m_pLogicClassModule;

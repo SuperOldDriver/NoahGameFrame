@@ -23,13 +23,14 @@
    limitations under the License.
 */
 
-#ifndef NFC_HELLO_WORLD4_H
-#define NFC_HELLO_WORLD4_H
+#ifndef NF_HELLO_WORLD4_H
+#define NF_HELLO_WORLD4_H
 
 #include <thread>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
 #include "NFComm/NFPluginModule/NFIComponent.h"
+#include "NFComm/NFPluginModule/NFIThreadPoolModule.h"
 
 /*
 IN THIS PLUGIN:
@@ -81,11 +82,11 @@ class NFIHelloWorld4Module
 {
 };
 
-class NFCHelloWorld4Module
+class NFHelloWorld4Module
     : public NFIHelloWorld4Module
 {
 public:
-    NFCHelloWorld4Module(NFIPluginManager* p)
+    NFHelloWorld4Module(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -103,6 +104,7 @@ protected:
 	
 protected:
     NFIActorModule* m_pActorModule;
+	NFIThreadPoolModule* m_pThreadPoolModule;
 };
 
 #endif

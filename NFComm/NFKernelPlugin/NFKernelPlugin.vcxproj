@@ -103,13 +103,15 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCDataTailModule.h" />
-    <ClInclude Include="NFCErrorBusModule.h" />
-    <ClInclude Include="NFCEventModule.h" />
-    <ClInclude Include="NFCKernelModule.h" />
-    <ClInclude Include="NFCSceneAOIModule.h" />
-    <ClInclude Include="NFCScheduleModule.h" />
+    <ClInclude Include="NFCellModule.h" />
+    <ClInclude Include="NFDataTailModule.h" />
+    <ClInclude Include="NFErrorBusModule.h" />
+    <ClInclude Include="NFEventModule.h" />
+    <ClInclude Include="NFKernelModule.h" />
+    <ClInclude Include="NFSceneModule.h" />
+    <ClInclude Include="NFScheduleModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
+    <ClInclude Include="NFThreadPoolModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -120,13 +122,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCDataTailModule.cpp" />
-    <ClCompile Include="NFCErrorBusModule.cpp" />
-    <ClCompile Include="NFCEventModule.cpp" />
-    <ClCompile Include="NFCKernelModule.cpp" />
-    <ClCompile Include="NFCSceneAOIModule.cpp" />
-    <ClCompile Include="NFCScheduleModule.cpp" />
+    <ClCompile Include="NFCellModule.cpp" />
+    <ClCompile Include="NFDataTailModule.cpp" />
+    <ClCompile Include="NFErrorBusModule.cpp" />
+    <ClCompile Include="NFEventModule.cpp" />
+    <ClCompile Include="NFKernelModule.cpp" />
+    <ClCompile Include="NFSceneModule.cpp" />
+    <ClCompile Include="NFScheduleModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />
+    <ClCompile Include="NFThreadPoolModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFConfigPlugin\NFConfigPlugin.vcxproj">

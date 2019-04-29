@@ -27,14 +27,15 @@
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 
-bool NFCHelloWorld4Module::Init()
+bool NFHelloWorld4Module::Init()
 {
 	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-
+	m_pThreadPoolModule = pPluginManager->FindModule<NFIThreadPoolModule>();
+	
 	return true;
 }
 
-int NFCHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgID, const std::string& strData)
+int NFHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgID, const std::string& strData)
 {
 	std::cout << "Main thread: " << std::this_thread::get_id() << " Actor: " << nFormActor << " MsgID: " << nSubMsgID << " Data:" << strData << std::endl;
 
@@ -42,26 +43,94 @@ int NFCHelloWorld4Module::RequestAsyEnd(const int nFormActor, const int nSubMsgI
 	return 0;
 }
 
-bool NFCHelloWorld4Module::AfterInit()
+bool NFHelloWorld4Module::AfterInit()
 {
-	
-	std::cout << "Hello, world4, AfterInit" << std::endl;
 
+	std::cout << "Hello, world4, AfterInit, Main thread: " << std::this_thread::get_id() << std::endl;
 
-	int nActorID = m_pActorModule->RequireActor();
-	m_pActorModule->AddComponent<NFHttpComponent>(nActorID);
-	m_pActorModule->AddDefaultEndFunc(nActorID, this, &NFCHelloWorld4Module::RequestAsyEnd);
+	/*
+	//example 1
+	int nActorID1 = m_pActorModule->RequireActor();
+	m_pActorModule->AddComponent<NFHttpComponent>(nActorID1);
+	m_pActorModule->AddDefaultEndFunc(nActorID1, this, &NFHelloWorld4Module::RequestAsyEnd);
+
 
 	for (int i = 0; i < 10; ++i)
 	{
-		m_pActorModule->SendMsgToActor(nActorID, i, "Test actor!");
+		m_pActorModule->SendMsgToActor(nActorID1, i, "Test actor!");
 	}
+
+
+	//example 2
+	int nActorID2 = m_pActorModule->RequireActor();
+	m_pActorModule->AddComponent<NFHttpComponent>(nActorID2);
+	m_pActorModule->AddEndFunc(nActorID2, 1, [nActorID2](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
+	{
+		std::cout << "example 2 AddEndFunc" << nActorID2 << std::endl;
+		return nSubMsgID;
+	});
+
+	for (int i = 0; i < 10; ++i)
+	{
+		m_pActorModule->SendMsgToActor(nActorID2, i, "Test actor!");
+	}
+
+	//example 3
+	int nActorID3 = m_pActorModule->RequireActor();
+	m_pActorModule->AddAsyncFunc(nActorID3, 1,
+		[nActorID3](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
+	{
+		std::cout << "example 3 Async " << nActorID3 << " " << nSubMsgID << std::endl;
+		return nSubMsgID;
+	},
+		[nActorID3](const int nFormActor, const int nSubMsgID, std::string& strData) -> int
+	{
+		std::cout << "example 3 end " << nActorID3 << " " << nSubMsgID  <<  std::endl;
+		return nSubMsgID;
+	});
+
+	for (int i = 0; i < 10; ++i)
+	{
+		m_pActorModule->SendMsgToActor(nActorID3, i, "Test actor!");
+	}
+	*/
+
+	//example 4
+	for (int i = 0; i < 100; ++i)
+	{
+		m_pThreadPoolModule->DoAsyncTask("sas",
+			[](const NFGUID taskID, const std::string& strData) -> std::string
+		{
+			std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+			return "aaaaaresulttttttt";
+		},
+			[](const NFGUID taskID, const std::string& strData) -> void
+		{
+			std::cout << "example 4 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
+		});
+	}
+
+	//example 5
+	for (int i = 0; i < 100; ++i)
+	{
+		m_pThreadPoolModule->DoAsyncTask(i, NFGUID(0, i), "sas",
+			[](const NFGUID taskID, const std::string& strData) -> std::string
+		{
+			std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task data:" << strData << std::endl;
+			return "aaaaaresulttttttt";
+		},
+			[](const NFGUID taskID, const std::string& strData) -> void
+		{
+			std::cout << "example 5 thread id: " << std::this_thread::get_id() << " task id:" << taskID.ToString() << " task result:" << strData << std::endl;
+		});
+	}
+
 
 	std::cout << "Hello, world4, AfterInit end" << std::endl;
 	return true;
 }
 
-bool NFCHelloWorld4Module::Execute()
+bool NFHelloWorld4Module::Execute()
 {
 	
 	//std::cout << "Hello, world4, Execute" << std::endl;
@@ -69,7 +138,7 @@ bool NFCHelloWorld4Module::Execute()
 	return true;
 }
 
-bool NFCHelloWorld4Module::BeforeShut()
+bool NFHelloWorld4Module::BeforeShut()
 {
 	
 	std::cout << "Hello, world4, BeforeShut" << std::endl;
@@ -77,7 +146,7 @@ bool NFCHelloWorld4Module::BeforeShut()
 	return true;
 }
 
-bool NFCHelloWorld4Module::Shut()
+bool NFHelloWorld4Module::Shut()
 {
 	
 	std::cout << "Hello, world4, Shut" << std::endl;
