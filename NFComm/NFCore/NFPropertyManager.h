@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -49,6 +49,8 @@ public:
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, const std::string& strPropertyName, const NFDATA_TYPE varType);
 
     virtual const NFGUID& Self();
+
+	virtual std::string ToString();
 
     virtual bool SetProperty(const std::string& strPropertyName, const NFData& TData);
 

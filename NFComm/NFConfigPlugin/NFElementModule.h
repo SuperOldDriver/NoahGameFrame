@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -120,7 +120,8 @@ protected:
 
     virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass);
     virtual bool CheckRef();
-    virtual bool LegalNumber(const char* str);
+	virtual bool LegalNumber(const char* str);
+	virtual bool LegalFloat(const char* str);
 
 protected:
     NFIClassModule* m_pClassModule;

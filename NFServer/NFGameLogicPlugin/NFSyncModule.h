@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -33,11 +33,12 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
+#include "NFComm/NFPluginModule/NFIClanRedisModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFISyncModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFSyncModule
     : public NFISyncModule
@@ -63,6 +64,7 @@ protected:
 	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 	int OnPlayePositionPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
+	void OnReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 private:
 	//sceneID -> <PlayerID, Position>
@@ -72,8 +74,8 @@ private:
 	NFIScheduleModule* m_pScheduleModule;
 	NFINetModule* m_pNetModule;
 	NFIClassModule* m_pClassModule;
+	NFILogModule* m_pLogModule;
 	NFIKernelModule* m_pKernelModule;
-	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
 	NFISceneModule* m_pSceneModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

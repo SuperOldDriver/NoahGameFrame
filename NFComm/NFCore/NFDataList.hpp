@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -537,13 +537,33 @@ public:
 	{
 	}
 
+	static const NFDataList& Empty()
+	{
+		static NFDataList data;
+		return data;
+	}
+
+	virtual std::string ToString() const
+	{
+		std::stringstream os;
+		for (int i = 0; i < GetCount(); ++i)
+		{
+			os << ToString(i);
+			if (i < GetCount() - 1)
+			{
+				os << "|";
+			}
+		}
+
+		return os.str();
+	}
+
 	virtual std::string ToString(const int index) const
 	{
+		std::string strData;
 
 		if (ValidIndex(index))
 		{
-			std::string strData;
-
 			const NFDATA_TYPE eType = Type(index);
 			switch (eType)
 			{
@@ -577,7 +597,7 @@ public:
 			}
 		}
 
-		return NULL_STR;
+		return strData;
 	}
 
 	virtual bool ToString(std::string& str, const std::string& strSplit) const

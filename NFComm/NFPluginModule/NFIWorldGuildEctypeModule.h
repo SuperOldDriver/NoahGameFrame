@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: flyicegood
    
@@ -24,12 +24,12 @@
 */
 
 
-#ifndef NFI_WORLD_GUILD_ECTYP_MODULE_H
-#define NFI_WORLD_GUILD_ECTYP_MODULE_H
+#ifndef NFI_WORLD_Clan_ECTYP_MODULE_H
+#define NFI_WORLD_Clan_ECTYP_MODULE_H
 
 #include "NFIModule.h"
 
-class NFIWorldGuildEctypeModule
+class NFIWorldClanEctypeModule
     : public NFIModule
 {
 public:

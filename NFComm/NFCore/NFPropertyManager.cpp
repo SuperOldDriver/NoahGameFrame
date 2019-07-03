@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -95,6 +95,20 @@ bool NFPropertyManager::SetProperty(const std::string& strPropertyName, const NF
 const NFGUID& NFPropertyManager::Self()
 {
     return mSelf;
+}
+
+std::string NFPropertyManager::ToString()
+{
+	std::string s;
+	std::stringstream stream;
+	NF_SHARE_PTR<NFIProperty> pProperty = First(s);
+	while (pProperty)
+	{
+		stream << s << ":" << pProperty->ToString() << "|";
+		pProperty = Next(s);
+	}
+
+	return stream.str();
 }
 
 bool NFPropertyManager::SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue)

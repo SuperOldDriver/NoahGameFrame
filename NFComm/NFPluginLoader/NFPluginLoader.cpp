@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -204,12 +204,18 @@ void ThreadFunc()
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
         std::string s;
-        std::cin >> s;
+		std::getline(std::cin, s);
         if ( 0 == stricmp( s.c_str(), "exit" ) )
         {
             bExitApp = true;
             gThread.detach();
         }
+		else if (s.find("show") == 0)
+		{
+			NFDataList data;
+			data.Split(s, " ");
+			NFGUID id(data.String(1));
+		}
     }
 }
 

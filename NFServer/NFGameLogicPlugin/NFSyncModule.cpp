@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -25,6 +25,8 @@
 
 
 #include "NFSyncModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFSyncModule::Init()
@@ -32,11 +34,11 @@ bool NFSyncModule::Init()
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	
     return true;
 }
@@ -58,7 +60,18 @@ bool NFSyncModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFSyncModule::OnNPCClassEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFSyncModule::OnPlayerClassEvent);
 
+
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFSyncModule::OnReqPosSyncProcess)) { return false; }
+
     return true;
+}
+
+void NFSyncModule::OnReqPosSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerPosSync);
+
+
+
 }
 
 int NFSyncModule::SyncHeart(const std::string & strHeartName, const float fTime, const int nCount)

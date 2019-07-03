@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -41,8 +41,8 @@ public:
     {
         RT_INDIVIDUAL_LEVEL,
         RT_INDIVIDUAL_MONEY,
-        RT_GUILD_LEVEL,
-        RT_GUILD_MONEY,
+        RT_Clan_LEVEL,
+        RT_Clan_MONEY,
         RT_DOTA_MODE = 100,
         RT_SURVIVAL_MODE,
     };

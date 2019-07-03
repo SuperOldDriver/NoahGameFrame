@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -128,14 +128,16 @@ bool NFPackModule::CreateItem( const NFGUID& self, const std::string& strConfigN
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = nullptr;
-	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType()) == NFMsg::EPVPType::PVP_HOME)
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	NFMsg::ESceneType eSceneType = (NFMsg::ESceneType)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == NFMsg::ESceneType::SCENE_SINGLE_CLONE
+		|| eSceneType == NFMsg::ESceneType::SCENE_MULTI_CLONE)
 	{
-		return CreateItemInNormalBag(self, strConfigName, nCount);
+		return CreateItemInTempBag(self, strConfigName, nCount);
 	}
 	else
 	{
-		return CreateItemInTempBag(self, strConfigName, nCount);
+		return CreateItemInNormalBag(self, strConfigName, nCount);
 	}
 	
 	return false;
@@ -304,7 +306,12 @@ bool NFPackModule::CreateItemInNormalBag(const NFGUID & self, const std::string 
 		xRowData->SetInt(NFrame::Player::BagItemList::ItemCount, nCount);
 		xRowData->SetInt(NFrame::Player::BagItemList::Date, pPluginManager->GetNowTime());
 
-		pRecord->AddRow(-1, *xRowData);
+		int row = pRecord->AddRow(-1, *xRowData);
+		if (row < 0)
+		{
+			m_pLogModule->LogError(self, " cant add item to bag " + strConfigName);
+			return false;
+		}
 	}
 	else
 	{

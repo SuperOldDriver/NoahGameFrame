@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -47,6 +47,19 @@ NF_SHARE_PTR<NFIRecord> NFRecordManager::AddRecord(const NFGUID& self, const std
 const NFGUID& NFRecordManager::Self()
 {
     return mSelf;
+}
+
+std::string NFRecordManager::ToString()
+{
+	std::stringstream stream;
+	NF_SHARE_PTR<NFIRecord> pRecord = First();
+	while (pRecord)
+	{
+		stream << pRecord->ToString() << std::endl;
+		pRecord = Next();
+	}
+
+	return stream.str();
 }
 
 bool NFRecordManager::SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue)

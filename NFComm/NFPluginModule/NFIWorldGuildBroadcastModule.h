@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -23,12 +23,12 @@
    limitations under the License.
 */
 
-#ifndef NFI_WORLD_GUILD_BROADCAST_MODULE_H
-#define NFI_WORLD_GUILD_BROADCAST_MODULE_H
+#ifndef NFI_WORLD_Clan_BROADCAST_MODULE_H
+#define NFI_WORLD_Clan_BROADCAST_MODULE_H
 
 #include "NFIModule.h"
 
-class NFIWorldGuildBroadcastModule
+class NFIWorldClanBroadcastModule
     : public NFIModule
 {
 public:

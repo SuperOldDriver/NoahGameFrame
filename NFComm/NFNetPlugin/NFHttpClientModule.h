@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -64,9 +64,9 @@ protected:
                             HTTP_RESP_FUNCTOR_PTR pCB);
 
     virtual bool DoPost(const std::string& strUri,
-                             const std::map<std::string, std::string>& xHeaders,
-                             const std::string& strPostData,
-                             HTTP_RESP_FUNCTOR_PTR pCB);
+        const std::map<std::string, std::string>& xHeaders,
+        const std::string& strPostData,
+        HTTP_RESP_FUNCTOR_PTR pCB, const std::string& strMemo = "");
 
 
 protected:

@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -77,7 +77,7 @@ protected:
 	int OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 
 	void OnGetCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
-	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData);
+	void OnPostCallBack(const NFGUID id, const int state_code, const std::string& strRespData, const std::string& strMemoData);
 private:
 
 	NFIClassModule* m_pLogicClassModule;

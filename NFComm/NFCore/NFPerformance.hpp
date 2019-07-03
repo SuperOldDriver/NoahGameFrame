@@ -3,7 +3,7 @@ This file is part of:
 NoahFrame
 https://github.com/ketoo/NoahGameFrame
 
-Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
 File creator: lvsheng.huang
 
@@ -55,7 +55,7 @@ public:
 
 	int64_t TimeScope()
 	{
-		return checkTime;
+		return checkTime - time;
 	}
 };
 

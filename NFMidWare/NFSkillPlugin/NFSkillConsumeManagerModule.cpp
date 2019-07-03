@@ -3,7 +3,7 @@
                 NoahFrame
             https://github.com/ketoo/NoahGameFrame
 
-   Copyright 2009 - 2018 NoahFrame(NoahGameFrame)
+   Copyright 2009 - 2019 NoahFrame(NoahGameFrame)
 
    File creator: lvsheng.huang
    
@@ -35,7 +35,8 @@ bool NFSkillConsumeManagerModule::Init()
 	
 	ResgisterConsumeModule(NFMsg::ESkillType::EST_BULLET_SINGLE, NF_SHARE_PTR<NFISkillConsumeProcessModule>(NF_NEW NFBulletSkillConsumeProcessModule(pPluginManager)));
 	ResgisterConsumeModule(NFMsg::ESkillType::EST_BULLET_REBOUND, NF_SHARE_PTR<NFISkillConsumeProcessModule>(NF_NEW NFBulletSkillConsumeProcessModule(pPluginManager)));
-	ResgisterConsumeModule(NFMsg::ESkillType::EST_BULLET_BOMB, NF_SHARE_PTR<NFISkillConsumeProcessModule>(NF_NEW NFBulletSkillConsumeProcessModule(pPluginManager)));
+	ResgisterConsumeModule(NFMsg::ESkillType::EST_BULLET_POS_BOMB, NF_SHARE_PTR<NFISkillConsumeProcessModule>(NF_NEW NFBulletSkillConsumeProcessModule(pPluginManager)));
+	ResgisterConsumeModule(NFMsg::ESkillType::EST_BULLET_TARGET_BOMB, NF_SHARE_PTR<NFISkillConsumeProcessModule>(NF_NEW NFBulletSkillConsumeProcessModule(pPluginManager)));
 
 	for (NF_SHARE_PTR<NFISkillConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
 	{
